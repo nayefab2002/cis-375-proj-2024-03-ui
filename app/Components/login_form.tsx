@@ -1,10 +1,11 @@
-import { lusitana } from '@/app/UI/fonts';
+import { lusitana } from '@/public/fonts';
 import {
   AtSymbolIcon,
   KeyIcon,
   ExclamationCircleIcon,
 } from '@heroicons/react/24/outline';
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
+import Button from '@mui/material/Button';
 
 
 export default function LoginForm() {
@@ -66,8 +67,8 @@ export default function LoginForm() {
 
 function LoginButton() {
   return (
-    <button className="flex mt-6 w-35 gap-5 self-start rounded-lg bg-blue-500 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base">
+    <Button className="flex mt-6 w-35 gap-5 self-start rounded-lg bg-blue-500 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base">
       Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
-    </button>
+    </Button>
   );
 }
