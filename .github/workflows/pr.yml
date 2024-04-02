@@ -39,5 +39,8 @@ jobs:
       - name: Check Code Formatting
         run: pnpm format:check
 
+      - name: Check Code Lint
+        run: pnpm lint
+
       # - name: Run Tests
       #   run: pnpm test
