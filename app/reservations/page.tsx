@@ -27,28 +27,83 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 export default function Page() {
-  
+  const [openReservationDialog, SetOpenReservationDialog]=useState(false);
+  const handleOpenDialog=()=>{
+    SetOpenReservationDialog(true);
+  }
+  const handleCloseDialog=()=>{
+    SetOpenReservationDialog(false);
+  }
   return <div>
-    <Grid container spacing={1} marginLeft={30}>
+    <Grid container spacing={1} marginLeft={10}>
+      
       {/* Reservation List */}
-      <Grid >
+      <Grid padding={2}>
+        <Button onClick={handleOpenDialog}>Add Reservation</Button>
         <ReservationList />
       </Grid>
       {/* Calendar and Add Reservation */}
       <Grid >
         <CalendarSection />
       </Grid>
-      
+      <Dialog
+        open={openReservationDialog}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleCloseDialog}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>{"Add Reservation"}</DialogTitle>
+        <DialogContent>
+        <TextField
+        autoFocus
+        margin="dense"
+        id="guestName"
+        label="Guest Name"
+        type="text"
+        fullWidth
+        value={""}
+        />
+         <TextField
+        autoFocus
+        margin="dense"
+        id="roomType"
+        label="Room type"
+        type="text"
+        fullWidth
+        value={""}
+        />
+         <TextField
+        autoFocus
+        margin="dense"
+        id="CheckIn"
+        label="Check In"
+        type="text"
+        fullWidth
+        value={""}
+        />
+        <TextField
+        autoFocus
+        margin="dense"
+        id="CheckOut"
+        label="Check Out"
+        type="text"
+        fullWidth
+        value={""}
+        />
+          
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog}>Cancel</Button>
+          <Button onClick={handleCloseDialog}>Save</Button>
+          <Button onClick={handleCloseDialog}>Delete</Button>
+        </DialogActions>
+      </Dialog>
     </Grid>
   </div>
 
   }
   
-interface ReservationListProps {
-    openDialog: boolean;
-    handleOpenDialog: () => void;
-    handleCloseDialog: () => void;
-}
 export function ReservationList() {
   const [openDialog, setOpenDialog]=useState(false);
   const handleOpenDialog=()=>{
