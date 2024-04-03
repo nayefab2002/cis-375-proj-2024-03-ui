@@ -39,7 +39,7 @@ export default function Page() {
       
       {/* Reservation List */}
       <Grid padding={2}>
-        <Button onClick={handleOpenDialog}>Add Reservation</Button>
+        <Button onClick={handleOpenDialog} className=''>Add Reservation</Button>
         <ReservationList />
       </Grid>
       {/* Calendar and Add Reservation */}
