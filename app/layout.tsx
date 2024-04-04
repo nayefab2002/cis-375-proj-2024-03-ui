@@ -2,8 +2,8 @@ import { ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import type { Metadata } from 'next';
 
-import { Navigation } from './components/navigation';
-import { theme } from './theme';
+import { Navigation } from '@/components/navigation';
+import { theme } from '@/theme';
 import './globals.css';
 
 export const metadata: Metadata = {
