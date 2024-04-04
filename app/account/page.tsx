@@ -1,5 +1,5 @@
 import Typography from '@mui/material/Typography';
 
-export default function AccountPage() {
+export default function Page() {
   return <Typography variant='h2'>Account</Typography>;
 }

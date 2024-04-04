@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 
 import LoginForm from '@/components/login-form';
 
-export default function LoginPage() {
+export default function Page() {
   return (
     <Box
       m={-2}
