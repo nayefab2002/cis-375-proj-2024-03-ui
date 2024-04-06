@@ -1,5 +1,13 @@
-import Typography from '@mui/material/Typography';
+'use client';
+
+import { redirect } from 'next/navigation';
+
+import { useAppSelector } from '@/redux/hooks';
 
 export default function Page() {
-  return <Typography variant='h2'>Home</Typography>;
+  const { isAuthenticated, isLoading } = useAppSelector((state) => state.auth);
+
+  if (!isLoading) {
+    redirect(isAuthenticated ? '/dashboard' : '/login');
+  }
 }

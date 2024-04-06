@@ -1,7 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-
 import moment from 'moment';
 import {
   Calendar,
@@ -59,7 +57,7 @@ export function ReservationsCalendar() {
         defaultDate={new Date()}
         defaultView='month'
         events={reservations}
-        style={{ height: '100vh', width: '100vh', marginLeft: 10 }}
+        style={{ height: '80vh', width: '100%' }}
         onSelectEvent={({ title }) => alert(title)}
         // onSelectSlot={handleSelect}
       />

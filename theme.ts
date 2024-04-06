@@ -11,13 +11,33 @@ export const lusitana = Lusitana({
 
 export const theme = createTheme({
   components: {
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'white',
+          borderBottom: '1px solid #222',
+          '@media (prefers-color-scheme: dark)': {
+            backgroundColor: '#181818',
+          },
+        },
+      },
+    },
     MuiButton: {
+      defaultProps: { variant: 'contained' },
       styleOverrides: {
         root: { textTransform: 'none' },
       },
     },
     MuiLink: {
       styleOverrides: { root: { textDecoration: 'none' } },
+    },
+    MuiOutlinedInput: {
+      defaultProps: { size: 'small' },
+      styleOverrides: {
+        root: {
+          '& .MuiSvgIcon-root': { fontSize: 18 },
+        },
+      },
     },
     MuiTextField: {
       defaultProps: { variant: 'outlined' },

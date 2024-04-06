@@ -1,13 +1,16 @@
 import { ThemeProvider } from '@mui/material/styles';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import Box from '@mui/material/Box';
 import type { Metadata } from 'next';
 
-import { Navigation } from '@/components/navigation';
+import { Navigation, Footer } from '@/app/components/common';
+import { Setup } from '@/app/components/utils';
+import ReduxProvider from '@/redux/provider';
 import { theme } from '@/theme';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'CIS-375 Hotel Manager',
+  title: 'Hotel Manager',
   icons: {
     icon: ['/favicon.ico'],
     apple: ['/apple-touch-icon.png'],
@@ -23,15 +26,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <ThemeProvider theme={theme}>
-        <body>
-          <Navigation />
+      <body className='bg-gray-100'>
+        <ReduxProvider>
+          <AppRouterCacheProvider>
+            <ThemeProvider theme={theme}>
+              <Setup />
 
-          <Box m={2} mx={3}>
-            {children}
-          </Box>
-        </body>
-      </ThemeProvider>
+              <Navigation />
+
+              <Box p={2} px={3} minHeight='85vh' bgcolor='#fffefd'>
+                {children}
+              </Box>
+
+              <Footer />
+            </ThemeProvider>
+          </AppRouterCacheProvider>
+        </ReduxProvider>
+      </body>
     </html>
   );
 }

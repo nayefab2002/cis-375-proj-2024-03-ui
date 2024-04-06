@@ -22,6 +22,7 @@ import { Transition } from './transition';
 
 export function ReservationsList() {
   const [openDialog, setOpenDialog] = useState(false);
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   const handleOpenDialog = () => {
     setOpenDialog(true);
@@ -76,19 +77,21 @@ export function ReservationsList() {
   ];
 
   return (
-    <>
-      <Paper sx={{ px: 2 }} elevation={2}>
-        <TextField
-          id='filled-search'
-          label='Search field'
-          type='search'
-          variant='filled'
-        />
+    <Paper sx={{ p: 2 }} elevation={2}>
+      <TextField
+        label='Search field'
+        type='search'
+        size='small'
+        value={searchTerm}
+        onChange={(event) => setSearchTerm(event.target.value)}
+      />
 
-        <List
-          sx={{ width: '100%', maxWidth: 380, bgcolor: 'background.paper' }}
-        >
-          {reservations.map((reservation) => (
+      <List sx={{ width: '100%', maxWidth: 380, bgcolor: 'background.paper' }}>
+        {reservations
+          .filter(({ guestName }) =>
+            guestName.match(new RegExp(searchTerm, 'i')),
+          )
+          .map((reservation) => (
             <ListItem
               key={reservation.id}
               secondaryAction={
@@ -118,66 +121,65 @@ export function ReservationsList() {
               />
             </ListItem>
           ))}
-        </List>
+      </List>
 
-        <Dialog
-          open={openDialog}
-          TransitionComponent={Transition}
-          keepMounted
-          onClose={handleCloseDialog}
-          aria-describedby='alert-dialog-slide-description'
-        >
-          <DialogTitle>{'Edit Reservation'}</DialogTitle>
+      <Dialog
+        open={openDialog}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleCloseDialog}
+        aria-describedby='alert-dialog-slide-description'
+      >
+        <DialogTitle>{'Edit Reservation'}</DialogTitle>
 
-          <DialogContent>
-            <TextField
-              autoFocus
-              margin='dense'
-              id='guestName'
-              label='Guest Name'
-              type='text'
-              fullWidth
-              value={guestName}
-            />
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin='dense'
+            id='guestName'
+            label='Guest Name'
+            type='text'
+            fullWidth
+            value={guestName}
+          />
 
-            <TextField
-              autoFocus
-              margin='dense'
-              id='roomType'
-              label='Room type'
-              type='text'
-              fullWidth
-              value={roomType}
-            />
+          <TextField
+            autoFocus
+            margin='dense'
+            id='roomType'
+            label='Room type'
+            type='text'
+            fullWidth
+            value={roomType}
+          />
 
-            <TextField
-              autoFocus
-              margin='dense'
-              id='CheckIn'
-              label='Check In'
-              type='text'
-              fullWidth
-              value={checkIn}
-            />
+          <TextField
+            autoFocus
+            margin='dense'
+            id='CheckIn'
+            label='Check In'
+            type='text'
+            fullWidth
+            value={checkIn}
+          />
 
-            <TextField
-              autoFocus
-              margin='dense'
-              id='CheckOut'
-              label='Check Out'
-              type='text'
-              fullWidth
-              value={checkOut}
-            />
-          </DialogContent>
+          <TextField
+            autoFocus
+            margin='dense'
+            id='CheckOut'
+            label='Check Out'
+            type='text'
+            fullWidth
+            value={checkOut}
+          />
+        </DialogContent>
 
-          <DialogActions>
-            <Button onClick={handleCloseDialog}>Cancel</Button>
-            <Button onClick={handleCloseDialog}>Save</Button>
-            <Button onClick={handleCloseDialog}>Delete</Button>
-          </DialogActions>
-        </Dialog>
-      </Paper>
-    </>
+        <DialogActions>
+          <Button onClick={handleCloseDialog}>Cancel</Button>
+          <Button onClick={handleCloseDialog}>Save</Button>
+          <Button onClick={handleCloseDialog}>Delete</Button>
+        </DialogActions>
+      </Dialog>
+    </Paper>
   );
 }
