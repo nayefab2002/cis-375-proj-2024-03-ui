@@ -125,7 +125,7 @@ export default function Navigation() {
         dispatch(setLogout());
       })
       .finally(() => {
-        router.push('/');
+        router.push('/login');
       });
   };
 
