@@ -1,10 +1,6 @@
 import { apiSlice } from '@/redux/services/apiSlice';
 
-interface User {
-  first_name: string;
-  last_name: string;
-  email: string;
-}
+import { User } from '@/redux/features/types';
 
 interface SocialAuthArgs {
   provider: string;

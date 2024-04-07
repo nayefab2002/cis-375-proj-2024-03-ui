@@ -3,10 +3,11 @@
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 
-import { useVerify } from '@/hooks';
+import { useRetrieveUser, useVerify } from '@/hooks';
 
 export default function Setup() {
   useVerify();
+  useRetrieveUser();
 
   return <ToastContainer />;
 }

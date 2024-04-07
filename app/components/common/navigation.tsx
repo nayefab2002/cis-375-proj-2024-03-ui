@@ -32,10 +32,7 @@ import Typography from '@mui/material/Typography';
 import { useRouter } from 'next/navigation';
 
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
-import {
-  useLogoutMutation,
-  useRetrieveUserQuery,
-} from '@/redux/features/authApiSlice';
+import { useLogoutMutation } from '@/redux/features/authApiSlice';
 import { logout as setLogout } from '@/redux/features/authSlice';
 
 const LOG_OUT = 'Log out';
@@ -86,10 +83,10 @@ export default function Navigation() {
   const dispatch = useAppDispatch();
   const [logout] = useLogoutMutation();
 
-  const { data: user } = useRetrieveUserQuery();
-  const userName = `${[user?.first_name, user?.last_name].filter(Boolean).join(' ') || user?.email || null}`;
+  const { isAuthenticated, isLoading, user } = useAppSelector(
+    (state) => state.auth,
+  );
 
-  const { isAuthenticated, isLoading } = useAppSelector((state) => state.auth);
   const navItems = isLoading
     ? []
     : isAuthenticated
@@ -143,7 +140,7 @@ export default function Navigation() {
           >
             <IconButton
               size='large'
-              aria-label='account of current user'
+              aria-label='navigation menu'
               aria-controls='menu-appbar'
               aria-haspopup='true'
               onClick={handleOpenNavMenu}
@@ -212,10 +209,17 @@ export default function Navigation() {
           <Box sx={{ flexGrow: 0 }}>
             {isAuthenticated && (
               <Tooltip title='Open settings'>
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <IconButton
+                  aria-label='account menu'
+                  aria-controls='menu-appbar'
+                  aria-haspopup='true'
+                  onClick={handleOpenUserMenu}
+                  sx={{ p: 0 }}
+                >
                   <Avatar
-                    alt={userName}
-                    src={`https://picsum.photos/seed/seed-${encodeURIComponent(userName)}/50/50`}
+                    alt={user?.display_name}
+                    src={`https://picsum.photos/seed/seed-${encodeURIComponent(String(user?.display_name))}/50/50`}
+                    sx={{ bgcolor: '#555' }}
                   />
                 </IconButton>
               </Tooltip>
@@ -237,10 +241,10 @@ export default function Navigation() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {userName && (
+              {user?.display_name && (
                 <div>
                   <Typography sx={{ pt: 0, pb: 1, px: 2 }}>
-                    <strong>{userName}</strong>
+                    <strong>{user?.display_name}</strong>
                   </Typography>
                   <Divider />
                 </div>

@@ -1,8 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { User } from '@/redux/features/types';
+
 interface AuthState {
   isAuthenticated: boolean;
   isLoading: boolean;
+  user?: User;
 }
 
 const initialState = {
@@ -23,8 +26,12 @@ const authSlice = createSlice({
     finishInitialLoad: (state) => {
       state.isLoading = false;
     },
+    setUser: (state, action) => {
+      state.user = action.payload;
+    },
   },
 });
 
-export const { setAuth, logout, finishInitialLoad } = authSlice.actions;
+export const { setAuth, logout, finishInitialLoad, setUser } =
+  authSlice.actions;
 export default authSlice.reducer;
