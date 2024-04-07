@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 'use client';
 
 import { redirect } from 'next/navigation';
@@ -17,4 +18,13 @@ export default function Page() {
   }
 
   redirect(isAuthenticated ? '/dashboard' : '/login');
+=======
+import Login from "./Login/page";
+import DashBoardPage from "./Dashboard/page";
+export default function Home() {
+  return <Login/>;
+  //return <DashBoardPage/>;
+  
+  
+>>>>>>> a27ff78703c367a76406d795239b933db416eb5c
 }
