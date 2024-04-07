@@ -1,6 +1,6 @@
 'use client';
 
-import { blue } from '@mui/material/colors';
+import { blue, pink } from '@mui/material/colors';
 import { createTheme } from '@mui/material/styles';
 import { Lusitana } from 'next/font/google';
 
@@ -36,6 +36,22 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           '& .MuiSvgIcon-root': { fontSize: 18 },
+        },
+      },
+    },
+    MuiTable: {
+      styleOverrides: {
+        root: {
+          borderRadius: 0,
+        },
+      },
+    },
+    MuiTableHead: {
+      styleOverrides: {
+        root: {
+          '& .MuiTableRow-root .MuiTableCell-root': {
+            backgroundColor: '#FAF6F7',
+          },
         },
       },
     },
@@ -75,6 +91,9 @@ export const theme = createTheme({
     primary: {
       light: blue[600],
       main: blue[900],
+    },
+    secondary: {
+      main: pink[500],
     },
   },
 });
